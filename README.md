@@ -26,4 +26,25 @@ A daily agent pipeline that uses Exa web search to discover health systems runni
 
 ## Setup
 
-_Coming soon — see implementation plan._
+1. Clone the repo and install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Copy `.env.example` to `.env` and fill in your keys:
+   - `EXA_API_KEY` — from [exa.ai](https://exa.ai)
+   - `ANTHROPIC_API_KEY` — from [console.anthropic.com](https://console.anthropic.com)
+   - `SLACK_BOT_TOKEN` — Bot token from your Slack app (needs `chat:write` scope)
+   - `SLACK_SALES_INTEL_CHANNEL_ID` — Channel ID of `#sales-intel`
+   - `SLACK_OPS_CHANNEL_ID` — Channel ID of `#sales-intel-ops`
+
+3. Run the pipeline:
+   ```bash
+   npm start
+   ```
+
+4. To schedule daily runs, add a cron job:
+   ```
+   0 7 * * 1-5 cd /path/to/exa-sales-intel && npm start >> logs/daily.log 2>&1
+   ```
+   This runs at 7am Monday–Friday.
